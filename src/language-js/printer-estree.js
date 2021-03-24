@@ -1983,6 +1983,7 @@ function printPathNoParens(path, options, print, args) {
       ]);
     case "TSLiteralType":
       return path.call(print, "literal");
+    case "IndexedAccessType":
     case "TSIndexedAccessType":
       return concat([
         path.call(print, "objectType"),

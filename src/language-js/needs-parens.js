@@ -433,11 +433,19 @@ function needsParens(path, options) {
         parent.type === "ArrayTypeAnnotation" ||
         parent.type === "NullableTypeAnnotation" ||
         parent.type === "IntersectionTypeAnnotation" ||
-        parent.type === "UnionTypeAnnotation"
+        parent.type === "UnionTypeAnnotation" ||
+        (name === "objectType" &&
+          (parent.type === "IndexedAccessType" ||
+            parent.type === "OptionalIndexedAccessType"))
       );
 
     case "NullableTypeAnnotation":
-      return parent.type === "ArrayTypeAnnotation";
+      return (
+        parent.type === "ArrayTypeAnnotation" ||
+        (name === "objectType" &&
+          (parent.type === "IndexedAccessType" ||
+            parent.type === "OptionalIndexedAccessType"))
+      );
 
     case "FunctionTypeAnnotation": {
       const ancestor =
@@ -449,6 +457,9 @@ function needsParens(path, options) {
         ancestor.type === "UnionTypeAnnotation" ||
         ancestor.type === "IntersectionTypeAnnotation" ||
         ancestor.type === "ArrayTypeAnnotation" ||
+        (name === "objectType" &&
+          (ancestor.type === "IndexedAccessType" ||
+            ancestor.type === "OptionalIndexedAccessType")) ||
         // We should check ancestor's parent to know whether the parentheses
         // are really needed, but since ??T doesn't make sense this check
         // will almost never be true.
@@ -466,6 +477,13 @@ function needsParens(path, options) {
 
     case "OptionalIndexedAccessType":
       return name === "objectType" && parent.type === "IndexedAccessType";
+
+    case "TypeofTypeAnnotation":
+      return (
+        name === "objectType" &&
+        (parent.type === "IndexedAccessType" ||
+          parent.type === "OptionalIndexedAccessType")
+      );
 
     case "StringLiteral":
     case "NumericLiteral":

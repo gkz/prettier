@@ -1,6 +1,6 @@
 {
-  "name": "prettier-fb",
-  "version": "2.2.1",
+  "name": "@gkz/prettier-fb",
+  "version": "2.2.1-0",
   "description": "Prettier is an opinionated code formatter",
   "bin": "./bin/prettier.js",
   "repository": "prettier/prettier",
@@ -19,6 +19,9 @@
     "src",
     "bin"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@angular/compiler": "10.2.3",
     "@babel/code-frame": "7.10.4",

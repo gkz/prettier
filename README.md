@@ -1,3 +1,12 @@
+This is a fork which backports several commits from future versions of Prettier
+to 2.2.1. This unlocks support for some features before we reformat our entire
+codebase according to some of the other changes made from 2.3.0 onwards
+(e.g. algorithm change when formatting assignments). This fork only backports
+commits made to Prettier. It should always be safe to migrate from this fork
+to the latest/future version of Prettier instead.
+
+===============================================================================
+
 ![Prettier Banner](https://raw.githubusercontent.com/prettier/prettier-logo/master/images/prettier-banner-light.png)
 
 <h2 align="center">Opinionated Code Formatter</h2>

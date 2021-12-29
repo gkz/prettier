@@ -1,14 +1,18 @@
-name: Internal_ESLint_Rules_Test
+name: Release_Script_Test
+
+defaults:
+  run:
+    working-directory: scripts/release
 
 on:
   push:
     paths:
-      - "scripts/tools/eslint-plugin-prettier-internal-rules/**"
-      - ".github/workflows/eslint-rules.yml"
+      - "scripts/release/**"
+      - ".github/workflows/release-script-test.yml"
   pull_request:
     paths:
-      - "scripts/tools/eslint-plugin-prettier-internal-rules/**"
-      - ".github/workflows/eslint-rules.yml"
+      - "scripts/release/**"
+      - ".github/workflows/release-script-test.yml"
 
 jobs:
   test:
@@ -21,10 +25,11 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2.5.1
         with:
+          version: "14"
           cache: "yarn"
 
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
 
       - name: Test
-        run: cd scripts/tools/eslint-plugin-prettier-internal-rules && yarn test-coverage
+        run: yarn test
